@@ -1,25 +1,45 @@
 body, html {
     height: 100%;
     width: 100%;
-    margin: 0
-    
+    margin: 0;
 }
 
 .root {
     display: flex;
+    flex-direction: column;
     height: 100%;
     width: auto;
+    align-items: center;
 }
 
-.root .column {
+.header {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
     display: flex;
     flex-direction: column;
+    flex: 10;
+    width: 50%;
+    height: auto;
+    border: 1px solid;
+}
+
+.row {
+    display: flex;
     flex: 1;
     border: 1px solid;
 }
 
-.column .box {
+.box {
     flex: 1;
     border: 1px solid;
 
+}
+
+.footer {
+    flex: 2;
 }
