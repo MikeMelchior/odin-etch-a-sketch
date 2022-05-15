@@ -1,0 +1,25 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0
+    
+}
+
+.root {
+    display: flex;
+    height: 100%;
+    width: auto;
+}
+
+.root .column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border: 1px solid;
+}
+
+.column .box {
+    flex: 1;
+    border: 1px solid;
+
+}
