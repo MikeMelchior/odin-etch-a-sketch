@@ -19,6 +19,8 @@ header.appendChild(makeGridCreateButton)
 const gridCreateButton = document.querySelector('.grid-create-button')
 gridCreateButton.textContent = 'Change grid height'
 
+
+
 const makeGrid = document.createElement('div');
 makeGrid.classList.add('grid');
 root.appendChild(makeGrid)
@@ -32,6 +34,18 @@ root.appendChild(makeFooter)
 let gridWidth;
 
 
+const announceGridSize = () => {
+    if (document.querySelector('.grid-size') != null) {
+        header.removeChild(header.lastChild)
+    }
+    const para = document.createElement('p')
+    para.classList.add('grid-size')
+    para.textContent = `${gridWidth} x ${gridWidth}`
+    header.appendChild(para)
+
+}
+
+
 const changeInputNumber = () => {
     gridWidth = prompt('Enter a number up to 100 to create the length of an X by X grid.')
     if (isNaN(gridWidth)) {
@@ -41,7 +55,9 @@ const changeInputNumber = () => {
     if (gridWidth > 100) {
         alert('Number too large');
         changeInputNumber()
-    }};
+    }
+    announceGridSize()
+};
 
 const removeCurrentGrid = () => {
     let myNode = document.querySelector('.grid');
@@ -63,7 +79,10 @@ const createNewGrid = () => {
     grid.appendChild(makeRow);
 }};
 
+
+
 gridCreateButton.addEventListener('click', removeCurrentGrid);
 gridCreateButton.addEventListener('click', createNewGrid);
+
 
 
