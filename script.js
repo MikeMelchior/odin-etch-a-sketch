@@ -1,4 +1,6 @@
-
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
 
 
 const makeRoot = document.createElement('div');
@@ -55,34 +57,52 @@ const changeInputNumber = () => {
     if (gridWidth > 100) {
         alert('Number too large');
         changeInputNumber()
-    }
-    announceGridSize()
-};
+}};
 
 const removeCurrentGrid = () => {
     let myNode = document.querySelector('.grid');
     while (myNode.firstChild) {
         myNode.removeChild(myNode.lastChild)
-    }};
-
-const createNewGrid = () => {
-    changeInputNumber();
-    for (let i = 1; i <= gridWidth; i++) {
-    const makeRow = document.createElement('div');
-    makeRow.classList.add(`row${i}`,'row');
-        for (let j = 1; j <= gridWidth; j++) {
-            const makeCol = document.createElement('div');
-            makeCol.classList.add(`column${j}`,'box');
-            const row = document.querySelector('row');
-            makeRow.appendChild(makeCol);
-        };
-    grid.appendChild(makeRow);
 }};
 
 
 
+const createNewGrid = () => {
+    let pixel = 1;
+    if (!gridWidth) gridWidth = 16;
+
+    for (let i = 1; i <= gridWidth; i++) {
+    const makeRow = document.createElement('div');
+    makeRow.classList.add(`row${i}`,'row');
+        for (let j = 1; j <= gridWidth; j++) {
+            const makeBox = document.createElement('div');
+            makeBox.classList.add('box',`pixel${pixel}`);
+            pixel++
+            const box = document.querySelector('.box');
+            makeRow.appendChild(makeBox);
+           
+            makeBox.addEventListener('mouseover', colorSquare)
+            makeBox.addEventListener('mousedown', colorSquare)
+            
+        };  
+    grid.appendChild(makeRow);
+    announceGridSize()
+}};
+
+const colorSquare = (e) => {
+    console.log(e.type)
+    if (e.type == 'mouseover' && !mouseDown) return
+    e.target.classList.toggle('active')
+    
+};
+
+
+
 gridCreateButton.addEventListener('click', removeCurrentGrid);
+gridCreateButton.addEventListener('click', changeInputNumber)
 gridCreateButton.addEventListener('click', createNewGrid);
 
 
 
+
+document.body.onload = () => {createNewGrid()}
