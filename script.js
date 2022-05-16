@@ -12,14 +12,23 @@ const root = document.querySelector('.root');
 const makeHeader = document.createElement('div');
 makeHeader.classList.add('header')
 root.appendChild(makeHeader)
+const header = document.querySelector('.header');
 
 const makeGridCreateButton = document.createElement('button');
 makeGridCreateButton.classList.add('btn','grid-create-button');
-header = document.querySelector('.header');
-header.appendChild(makeGridCreateButton)
-
+header.appendChild(makeGridCreateButton);
 const gridCreateButton = document.querySelector('.grid-create-button')
 gridCreateButton.textContent = 'Change grid height'
+
+
+const makeResetButton = document.createElement('button');
+makeResetButton.classList.add('btn','reset-button')
+header.appendChild(makeResetButton)
+const resetButton = document.querySelector('.reset-button');
+resetButton.textContent = 'Reset'
+
+
+
 
 
 
@@ -68,6 +77,7 @@ const removeCurrentGrid = () => {
 
 
 const createNewGrid = () => {
+    removeCurrentGrid()
     let pixel = 1;
     if (!gridWidth) gridWidth = 16;
 
@@ -90,19 +100,22 @@ const createNewGrid = () => {
 }};
 
 const colorSquare = (e) => {
-    console.log(e.type)
     if (e.type == 'mouseover' && !mouseDown) return
     e.target.classList.toggle('active')
-    
+    //e.target.style.backgroundColor = "red"
 };
 
+const resetGrid = () => {
+    createNewGrid()
+}
 
 
-gridCreateButton.addEventListener('click', removeCurrentGrid);
+
 gridCreateButton.addEventListener('click', changeInputNumber)
 gridCreateButton.addEventListener('click', createNewGrid);
-
+resetButton.addEventListener('click', createNewGrid)
 
 
 
 document.body.onload = () => {createNewGrid()}
+
